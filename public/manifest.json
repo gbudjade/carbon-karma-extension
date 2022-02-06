@@ -1,25 +1,31 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "manifest_version": 2,
+
+  "name": "Carbon-Karma",
+  "description": "An extension to measure the carbon footprint of your website traffic",
+  "version": "0.0.1",
+
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
+  },
+  "background": {
+    "scripts": [
+      "script.js"
+    ]
+ },
+  "icons": {
+    "16": "ic_launcher.png",
+    "48": "ic_launcher.png",
+    "128": "ic_launcher.png"
+  },
+  "content_security_policy": "script-src 'self' 'sha256-ICprEKS0uVLpZuuoGjRSJeXSXQqFlC1rsorQc+wE8Vg='; object-src 'self'",
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "activeTab",
+    "http://*/*", 
+    "https://*/*"
+  ]
 }

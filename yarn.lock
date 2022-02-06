@@ -2975,6 +2975,13 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
+bytes-to-co2@^0.3.23:
+  version "0.3.23"
+  resolved "https://registry.yarnpkg.com/bytes-to-co2/-/bytes-to-co2-0.3.23.tgz#dc369fd472076c53dc98f4c8b92b1e86e6e654f6"
+  integrity sha512-XIncpqpkQ5Sxv0lAl3vdmZ7ohhL+cQ8eShxGLEtzVX0niVVFAjAfK+RRkDQ3k8NS5xg3YXXCSF/fJMFGXxyqWA==
+  dependencies:
+    co2-data "^0.0.21"
+
 bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
@@ -3277,6 +3284,11 @@ cliui@^6.0.0:
     string-width "^4.2.0"
     strip-ansi "^6.0.0"
     wrap-ansi "^6.2.0"
+
+co2-data@^0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/co2-data/-/co2-data-0.0.21.tgz#71bce12b0b712ccf48d2e8a87df38dcb81f28500"
+  integrity sha512-0WSrrKbbhV5JYt4HXamJVL4vR8vLWViSLNGr/xAWMgsknvceC0qrOtIDkG6Xp85kxa1i2dhC1aZ4CCjP/QgeRQ==
 
 co@^4.6.0:
   version "4.6.0"
