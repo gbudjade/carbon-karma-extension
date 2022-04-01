@@ -19,7 +19,7 @@
     "48": "ic_launcher.png",
     "128": "ic_launcher.png"
   },
-  "content_security_policy": "script-src 'self' 'sha256-ICprEKS0uVLpZuuoGjRSJeXSXQqFlC1rsorQc+wE8Vg='; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'sha256-6n0FmCdmeDkqpPDl3PTV0TJB5V4Y042tiZ5OOyl9rgk='; object-src 'self'",
   "permissions": [
     "storage",
     "tabs",

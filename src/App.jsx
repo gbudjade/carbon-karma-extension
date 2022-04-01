@@ -1,6 +1,7 @@
 /*global chrome*/
 /*global browser*/
 import React, { useEffect, useState } from 'react';
+import Switch from '@mui/material/Switch';
 import { bytesToCo2 } from "bytes-to-co2";
 import './App.css';
 import { ProgressBar } from './ProgressBar';
@@ -12,11 +13,14 @@ const getRegion = async () => {
   return res.countryCode;
 }
 
+const label = { inputProps: { 'aria-label': 'Switch demo' }, label: 'Show website data' };
+
 const MONTHLY_NUM_TREES = 17;   // 30kgs of C02 translate to 17 trees a month
 const MONTHLY_EMISSIONS = 30000;  // an individual can emit 30kgs of CO2 a month
 
 const App = () => {
   const [treeViewVer, setTreeViewVer] = useState(0);
+  const [showWebsiteData, setShowWebsiteData] = useState(false);
 
   const [countryCode, setCountryCode] = useState('');
   const [numTrees, setNumTrees] = useState(MONTHLY_NUM_TREES);
@@ -77,6 +81,10 @@ const App = () => {
 
   const toggleTreeViewVer = () => {
     setTreeViewVer((treeViewVer + 1) % 4)
+  }
+
+  const onSwitchChange = () => {
+    setShowWebsiteData(!showWebsiteData);
   }
 
   // console.log(statsJson);
@@ -144,8 +152,15 @@ const App = () => {
           }
         </div>
 
-        {treeViewVer !== 1  && <p className="emissions-table-header">{`Total Emissions: ${totalEmissions.toFixed(4)}`}</p>}
-        <div className={`emissions-table-section ${treeViewVer=== 1 ? 'view-one' : '' }`}>
+        {treeViewVer !== 1  && 
+          <div style={{display: 'flex'}}>
+              <p className="emissions-table-header">
+                {`Total Emissions: ${totalEmissions.toFixed(2)}`}
+              </p>
+              <p className="emissions-switch-label"><Switch {...label} checked={showWebsiteData} onClick={onSwitchChange} onChange={onSwitchChange} /> Show website data</p>
+          </div>
+          }
+        {showWebsiteData && <div className={`emissions-table-section ${treeViewVer=== 1 ? 'view-one' : '' }`}>
           <table>
             <thead>
               <tr>
@@ -162,7 +177,7 @@ const App = () => {
               </tr>
             })}
           </table>
-        </div>
+        </div>}
 
       </section>
       {/* <section className="app-lower-section">

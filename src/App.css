@@ -88,6 +88,11 @@ table {
   margin: 20px 0px 4px 12px;
 }
 
+.emissions-switch-label {
+  font-size: 12px;
+  font-weight: 400;
+}
+
 td {
   text-align: left;
   padding: 12px 8px;
