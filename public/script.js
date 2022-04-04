@@ -10,27 +10,36 @@ const extractHostname = (url) => {
   };
   
 const setByteLengthPerOrigin = (origin, byteLength) => {
-    const stats = localStorage.getItem('stats');
-    const bytesPerMonth = localStorage.getItem('bytesPerMonth');
-    const totalBytes = localStorage.getItem('totalBytes') || 0;
-    const statsJson = null === stats ? {} : JSON.parse(stats);
-    const bytesPerMonthJson = null === bytesPerMonth ? {} : JSON.parse(bytesPerMonth);
+    chrome.storage.local.get(['stats', 'bytesPerYear', 'totalBytes'], function(items) {
+        console.log('Settings retrieved', items);
+        const stats = items.stats || null;
+        const bytesPerYear = items.bytesPerYear || null;
+        const totalBytes = items.totalBytes || 0;
+        const statsJson = null === stats ? {} : JSON.parse(stats);
+        const bytesPerYearJson = null === bytesPerYear ? {} : JSON.parse(bytesPerYear);
 
-    const month = new Date().getMonth();
+        const year = new Date().getFullYear();
 
-    let bytePerOrigin = undefined === statsJson[origin] ? 0 : parseInt(statsJson[origin]);
-    let currentMonthBytes = undefined === bytesPerMonthJson[month] ? 0 : parseInt(bytesPerMonthJson[month]);
-    statsJson[origin] = bytePerOrigin + byteLength;
-    bytesPerMonthJson[month] = currentMonthBytes + byteLength;
+        let bytePerOrigin = undefined === statsJson[origin] ? 0 : parseInt(statsJson[origin]);
+        let currentYearBytes = undefined === bytesPerYearJson[year] ? 0 : parseInt(bytesPerYearJson[year]);
+        statsJson[origin] = bytePerOrigin + byteLength;
+        bytesPerYearJson[year] = currentYearBytes + byteLength;
 
-    console.log(totalBytes);
-    console.log(byteLength);
-    console.log(bytesPerMonthJson[month]);
-    const updatedTotal = Number(totalBytes) + Number(byteLength);
-  
-    localStorage.setItem('stats', JSON.stringify(statsJson));
-    localStorage.setItem('bytesPerMonth', JSON.stringify(bytesPerMonthJson));
-    localStorage.setItem('totalBytes', updatedTotal);
+        console.log(totalBytes);
+        console.log(byteLength);
+        console.log(bytesPerYearJson[year]);
+        const updatedTotal = Number(totalBytes) + Number(byteLength);
+        chrome.storage.local.set({'stats': JSON.stringify(statsJson), 'bytesPerYear': JSON.stringify(bytesPerYearJson), 'totalBytes': updatedTotal}, function() {
+            console.log('Settings saved');
+        });
+      });
+
+    // const stats = localStorage.getItem('stats');
+    // const bytesPerYear = localStorage.getItem('bytesPerYear');
+    // const totalBytes = localStorage.getItem('totalBytes') || 0;
+    // localStorage.setItem('stats', JSON.stringify(statsJson));
+    // localStorage.setItem('bytesPerYear', JSON.stringify(bytesPerYearJson));
+    // localStorage.setItem('totalBytes', updatedTotal);
   };
   
 const isChrome = () => {
@@ -70,9 +79,9 @@ const isChrome = () => {
   };
   
   const addOneMinute = () => {
-    let duration = localStorage.getItem('duration');
-    duration = null === duration ? 1 : 1 * duration + 1;
-    localStorage.setItem('duration', duration);
+    // let duration = localStorage.getItem('duration');
+    // duration = null === duration ? 1 : 1 * duration + 1;
+    // localStorage.setItem('duration', duration);
   };
   
   let addOneMinuteInterval;
@@ -87,9 +96,9 @@ const isChrome = () => {
         ['responseHeaders']
       );
   
-      if (!addOneMinuteInterval) {
-        addOneMinuteInterval = setInterval(addOneMinute, 60000);
-      }
+    //   if (!addOneMinuteInterval) {
+    //     addOneMinuteInterval = setInterval(addOneMinute, 60000);
+    //   }
   
       return;
     }

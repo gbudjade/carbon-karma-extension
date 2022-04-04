@@ -1,30 +1,31 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Carbon-Karma",
   "description": "An extension to measure the carbon footprint of your website traffic",
   "version": "0.0.1",
-
-  "browser_action": {
+  "action": {
     "default_popup": "index.html",
     "default_title": "Open the popup"
   },
   "background": {
-    "scripts": [
-      "script.js"
-    ]
- },
+    "service_worker": "script.js"
+  },
   "icons": {
     "16": "ic_launcher.png",
     "48": "ic_launcher.png",
     "128": "ic_launcher.png"
   },
-  "content_security_policy": "script-src 'self' 'sha256-6n0FmCdmeDkqpPDl3PTV0TJB5V4Y042tiZ5OOyl9rgk='; object-src 'self'",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
   "permissions": [
-    "storage",
     "tabs",
+    "storage",
     "webRequest",
-    "activeTab",
+    "activeTab"
+  ],
+  "host_permissions": [
     "http://*/*", 
     "https://*/*"
   ]
